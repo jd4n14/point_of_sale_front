@@ -65,6 +65,12 @@ const data = [
     to: "customers",
   },
   {
+    icon: <MessageCircle size={16} />,
+    color: "blue",
+    label: "Payments",
+    to: "payments",
+  },
+  {
     icon: <Database size={16} />,
     color: "grape",
     label: "Settings",

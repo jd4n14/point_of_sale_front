@@ -13,7 +13,7 @@ const Shell = ({ children }: { children: JSX.Element }) => {
       styles={{
         main: {
           height: "100vh",
-          paddingTop: 0,
+          paddingTop: 10,
           width: "calc(100vw)",
           background:
             theme.colorScheme === "dark"
@@ -24,7 +24,7 @@ const Shell = ({ children }: { children: JSX.Element }) => {
       // aside={<Aside />}
       navbar={<Navbar />}
       navbarOffsetBreakpoint="sm"
-      header={<Header />}
+      // header={<Header />}
     >
       {children}
     </AppShell>
