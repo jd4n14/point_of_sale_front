@@ -1,7 +1,7 @@
 import { Drawer, MediaQuery, Paper, useMantineTheme, Aside as MantineAside } from "@mantine/core";
 import { useState } from "react";
 
-export const Aside = () => {
+export const Aside = ({ children }) => {
   const [status, setStatus] = useState({
     rightSide: false,
     leftSide: false
@@ -34,7 +34,7 @@ export const Aside = () => {
       </Drawer>
       <MediaQuery smallerThan="md" styles={{ display: 'none' }}>
         <MantineAside p="md" hiddenBreakpoint="md" width={{ md: 300 }}>
-          <div>Usuarios</div>
+          {children}
         </MantineAside>
       </MediaQuery>
     </>

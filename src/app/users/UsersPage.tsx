@@ -76,7 +76,6 @@ const UsersPage = () => {
           justifyContent: "space-between",
           marginBottom: 10,
           gap: 10,
-          marginTop: 10,
         })}
       >
         <Text>Users</Text>

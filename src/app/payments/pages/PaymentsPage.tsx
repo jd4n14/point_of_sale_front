@@ -8,9 +8,17 @@ import {
   Text,
   TextInput,
 } from "@mantine/core";
-import { Car, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
+import { useUi } from "../../../shared/hooks/useUi";
+import { Overview } from "../components/Overview";
 
 const PaymentsPage = () => {
+  useUi({
+    enableAside: true,
+    aside: <Overview />,
+    disableOnExit: true,
+  });
+
   return (
     <Box>
       <Box
@@ -18,7 +26,7 @@ const PaymentsPage = () => {
           justifyContent: "end",
           display: "flex",
           marginBottom: 10,
-          gap: theme.spacing.sm
+          gap: theme.spacing.sm,
         })}
       >
         <TextInput placeholder="Search" />

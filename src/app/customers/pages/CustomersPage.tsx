@@ -1,4 +1,4 @@
-import { Box, Button, TextInput } from "@mantine/core";
+import { Box, Button, Text, TextInput } from "@mantine/core";
 import { Link } from "react-router-dom";
 import { CustomersTable } from "../components/CustomersTable";
 
@@ -9,7 +9,7 @@ const CustomersPage = () => {
         sx={() => ({
           display: "flex",
           justifyContent: "end",
-          gap: 10
+          gap: 10,
         })}
       >
         <TextInput placeholder="Search customer" />

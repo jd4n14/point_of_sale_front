@@ -1,12 +1,11 @@
-import { AppShell, Burger, MediaQuery, useMantineTheme } from "@mantine/core";
-import { useAtom } from "jotai";
+import { AppShell, useMantineTheme } from "@mantine/core";
+import { useUi } from "../../../shared/hooks/useUi";
 import { Aside } from "./Aside";
-import { Header } from "./Header";
 import { Navbar } from "./Navbar";
-import { UIAtom } from "./ui.atom";
 
 const Shell = ({ children }: { children: JSX.Element }) => {
   const theme = useMantineTheme();
+  const { withAside, aside } = useUi();
 
   return (
     <AppShell
@@ -21,7 +20,7 @@ const Shell = ({ children }: { children: JSX.Element }) => {
               : theme.colors.gray[0],
         },
       }}
-      // aside={<Aside />}
+      aside={withAside ? <Aside>{aside}</Aside> : <></>}
       navbar={<Navbar />}
       navbarOffsetBreakpoint="sm"
       // header={<Header />}
