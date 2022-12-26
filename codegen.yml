@@ -1,0 +1,10 @@
+schema: "http://localhost:3000/graphql"
+generates:
+  src/gql/components.tsx:
+    config:
+      withHooks: true
+      gqlImport: 'urql#gql'
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-urql
