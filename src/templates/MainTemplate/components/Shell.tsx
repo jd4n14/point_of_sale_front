@@ -16,8 +16,8 @@ const Shell = ({ children }: { children: JSX.Element }) => {
           width: "calc(100vw)",
           background:
             theme.colorScheme === "dark"
-              ? theme.colors.dark[8]
-              : theme.colors.gray[0],
+              ? 'dark'
+              : 'white',
         },
       }}
       aside={withAside ? <Aside>{aside}</Aside> : <></>}

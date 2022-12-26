@@ -4,7 +4,7 @@ import {
   ColorScheme,
 } from "@mantine/core";
 import { RouterProvider } from "react-router-dom";
-import { useHotkeys, useLocalStorage } from "@mantine/hooks";
+import { useHotkeys, useLocalStorage, useMediaQuery } from "@mantine/hooks";
 import router from "./router";
 import { ModalsProvider } from "@mantine/modals";
 
@@ -19,6 +19,7 @@ export default function App() {
     setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
 
   useHotkeys([["mod+J", () => toggleColorScheme()]]);
+  const isMobile = useMediaQuery("(max-width: 600px)");
   return (
     <ColorSchemeProvider
       colorScheme={colorScheme}
@@ -29,10 +30,11 @@ export default function App() {
         withNormalizeCSS
         theme={{
           colorScheme,
-          fontFamily: 'Inter'
+          fontFamily: "Inter",
+          primaryColor: 'violet',
         }}
       >
-        <ModalsProvider>
+        <ModalsProvider modalProps={{ fullScreen: isMobile }}>
           <RouterProvider router={router} />
         </ModalsProvider>
       </MantineProvider>

@@ -114,9 +114,6 @@ const UsersPage = () => {
             ))}
           </tbody>
         </Table>
-        <Box sx={() => ({ display: 'flex', justifyContent: 'center', marginTop: 10 })}>
-          <Pagination total={10} />
-        </Box>
       </div>
     </div>
   );

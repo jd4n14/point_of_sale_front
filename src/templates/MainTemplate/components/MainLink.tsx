@@ -35,7 +35,7 @@ export const MainLink = ({ icon, color, label, to }: MainLinkProps) => {
       })}
     >
       <Group>
-        <ThemeIcon color={color} variant="light">
+        <ThemeIcon color={color} variant="filled">
           {icon}
         </ThemeIcon>
 

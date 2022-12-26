@@ -5,6 +5,7 @@ import LoginRoutes from "../app/login/routes";
 import UsersRoutes from "../app/users/routes";
 import CustomersRoutes from "../app/customers/routes";
 import PaymentRoutes from "../app/payments/routes";
+import SettingsRoutes from "../app/settings/routes";
 
 const router = createBrowserRouter([
   ...LoginRoutes,
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
       ...UsersRoutes,
       ...CustomersRoutes,
       ...PaymentRoutes,
+      ...SettingsRoutes
     ],
   },
 ]);
