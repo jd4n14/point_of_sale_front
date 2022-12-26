@@ -1,10 +1,11 @@
 schema: "http://localhost:3000/graphql"
+emitLegacyCommonJSImports: false
+documents:
+  - "src/**/*.tsx"
+ignoreNoDocuments: true
 generates:
-  src/gql/components.tsx:
-    config:
-      withHooks: true
-      gqlImport: 'urql#gql'
-    plugins:
-      - typescript
-      - typescript-operations
-      - typescript-urql
+  src/gql/:
+    preset: client
+    presetConfig:
+      augmentedModuleName: '@urql/core'
+ 

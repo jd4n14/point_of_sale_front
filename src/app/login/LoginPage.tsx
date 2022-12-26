@@ -1,21 +1,25 @@
 import { Card } from "@mantine/core";
-import { useMutation, gql } from "urql";
+import { gql } from "urql";
+import { RegisterUser, useLoginMutation } from "../../gql/documents";
 import { LoginForm } from "./components/LoginForm";
 
-const LoginMutation = gql`
-mutation Login($user: RegisterUser!) {
-  login(user: $user) {
-    token
+export const LoginMutation = gql`
+  mutation Login($user: RegisterUser!) {
+    login(user: $user) {
+      token
+    }
   }
-}
-`
+`;
+
 const LoginPage = () => {
-  const [loginResult, login] = useMutation(LoginMutation);
-  login({  });
+  const [loginResult, login] = useLoginMutation();
+  const onSubmit = async ({ email, password }: RegisterUser) => {
+    const { data } = await login({ user: { email, password } });
+  };
   return (
     <div className="w-full place-content-center grid h-screen">
       <Card w={400}>
-        <LoginForm />
+        <LoginForm onSubmit={onSubmit} />
       </Card>
     </div>
   );

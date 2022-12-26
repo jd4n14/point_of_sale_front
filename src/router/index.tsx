@@ -17,7 +17,7 @@ const router = createBrowserRouter([
       ...UsersRoutes,
       ...CustomersRoutes,
       ...PaymentRoutes,
-      ...SettingsRoutes
+      ...SettingsRoutes,
     ],
   },
 ]);
