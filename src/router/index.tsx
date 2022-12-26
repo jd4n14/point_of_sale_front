@@ -6,18 +6,25 @@ import UsersRoutes from "../app/users/routes";
 import CustomersRoutes from "../app/customers/routes";
 import PaymentRoutes from "../app/payments/routes";
 import SettingsRoutes from "../app/settings/routes";
+import { ProtectedRoute } from "./ProtectedRoute";
 
 const router = createBrowserRouter([
   ...LoginRoutes,
   {
-    path: "/",
-    element: <MainTemplate />,
+    path: "",
+    element: <ProtectedRoute />,
     children: [
-      ...HomeRoutes,
-      ...UsersRoutes,
-      ...CustomersRoutes,
-      ...PaymentRoutes,
-      ...SettingsRoutes,
+      {
+        path: "",
+        element: <MainTemplate />,
+        children: [
+          ...HomeRoutes,
+          ...UsersRoutes,
+          ...CustomersRoutes,
+          ...PaymentRoutes,
+          ...SettingsRoutes,
+        ],
+      },
     ],
   },
 ]);

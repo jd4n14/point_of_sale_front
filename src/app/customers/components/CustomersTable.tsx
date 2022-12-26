@@ -37,7 +37,7 @@ const columns: ColumnDef<Customer, any>[] = [
   }),
   columnHelper.accessor("status", {
     id: "status",
-    cell: (info) => <span>{info.renderValue().toString()}</span>,
+    cell: (info) => <span>{info.renderValue()}</span>,
   }),
   columnHelper.display({
     id: "actions",
@@ -45,25 +45,14 @@ const columns: ColumnDef<Customer, any>[] = [
   }),
 ];
 
-const data: Customer[] = [
-  {
-    identifier: "1",
-    debt: 14.43,
-    lastName: "Last Name",
-    name: "Name",
-    status: false,
-    type: "operator",
-  },
-];
-
-export const CustomersTable = () => {
+export const CustomersTable = ({ customers }: { customers: Customer[] }) => {
   const table = useReactTable({
     columns,
-    data,
+    data: customers,
     getCoreRowModel: getCoreRowModel(),
   });
   return (
-    <Table striped withBorder>
+    <Table striped>
       <thead>
         {table.getHeaderGroups().map((headerGroup) => (
           <tr key={headerGroup.id}>

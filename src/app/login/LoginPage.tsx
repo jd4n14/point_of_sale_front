@@ -1,6 +1,8 @@
 import { Card } from "@mantine/core";
+import { useNavigate } from "react-router-dom";
 import { gql } from "urql";
 import { RegisterUser, useLoginMutation } from "../../gql/documents";
+import { useAuth } from "../../shared/hooks/useAuth";
 import { LoginForm } from "./components/LoginForm";
 
 export const LoginMutation = gql`
@@ -12,10 +14,17 @@ export const LoginMutation = gql`
 `;
 
 const LoginPage = () => {
-  const [loginResult, login] = useLoginMutation();
+  const [_, login] = useLoginMutation();
+  const { setToken } = useAuth();
+  const navigate = useNavigate();
+
   const onSubmit = async ({ email, password }: RegisterUser) => {
-    const { data } = await login({ user: { email, password } });
+    const { data, error } = await login({ user: { email, password } });
+    if (error) throw error;
+    setToken(data?.login.token);
+    navigate("/");
   };
+
   return (
     <div className="w-full place-content-center grid h-screen">
       <Card w={400}>

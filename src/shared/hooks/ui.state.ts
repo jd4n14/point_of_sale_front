@@ -1,4 +1,3 @@
-import { WritableAtom } from "jotai";
 import { atomWithReset } from "jotai/utils";
 
 interface TemplateAtom {

@@ -1,8 +1,24 @@
 import { Box, Button, Text, TextInput } from "@mantine/core";
 import { Link } from "react-router-dom";
+import { useQuery } from "urql";
+import { graphql } from "../../../gql";
 import { CustomersTable } from "../components/CustomersTable";
 
+const GetAllCustomers = graphql(`
+  query AllCustomers {
+    clients {
+      id
+      name
+      address1
+      lastName
+      phone
+      identifier
+    }
+  }
+`);
+
 const CustomersPage = () => {
+  const [{ data, fetching }] = useQuery({ query: GetAllCustomers });
   return (
     <div>
       <Box
@@ -18,7 +34,7 @@ const CustomersPage = () => {
         </Button>
       </Box>
       <Box mt={10}>
-        <CustomersTable />
+        <CustomersTable customers={data?.clients || []} />
       </Box>
     </div>
   );

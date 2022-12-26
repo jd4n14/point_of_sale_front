@@ -2,6 +2,7 @@ import { z } from "zod";
 import { useForm, zodResolver } from "@mantine/form";
 import { Button, PasswordInput, TextInput, Text } from "@mantine/core";
 import { RegisterUser } from "../../../gql/documents";
+import { CombinedError } from "urql";
 
 const schema = z.object({
   email: z.string().email(),
@@ -12,7 +13,7 @@ type LoginForm = z.infer<typeof schema>;
 
 interface ILoginFormProps {
   login?: LoginForm;
-  onSubmit: (values: RegisterUser) => any;
+  onSubmit: (values: RegisterUser) => Promise<any>;
 }
 
 type LoginFormProps = {
@@ -34,7 +35,14 @@ export const LoginForm: LoginFormProps = (props?: ILoginFormProps) => {
   return (
     <form
       onSubmit={form.onSubmit(({ email, password }) => {
-        props?.onSubmit({ email, password });
+        props?.onSubmit({ email, password }).catch((error) => {
+          if (error instanceof CombinedError) {
+            form.setFieldError(
+              "email",
+              error.graphQLErrors.join(", ").toString()
+            );
+          }
+        });
       })}
       className="flex flex-col gap-3"
     >
