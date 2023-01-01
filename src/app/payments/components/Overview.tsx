@@ -1,47 +1,20 @@
-import {
-  ActionIcon,
-  Select,
-  Box,
-  ScrollArea,
-  Button,
-  UnstyledButton,
-  Card,
-  Text,
-  Group,
-} from "@mantine/core";
-import { Car, Plus, Users } from "lucide-react";
+import { Box, ScrollArea, Button, Card, Text, Group } from "@mantine/core";
 
 export const Overview = () => {
   return (
     <Box
       sx={() => ({ display: "flex", flexDirection: "column", height: "100%" })}
     >
-      <Box
-        sx={(theme) => ({
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: theme.spacing.sm,
-        })}
-      >
-        <Select
-          clearable
-          searchable
-          icon={<Users size={16} />}
-          placeholder="Search customer"
-          data={[{ value: "id", label: "Label 1" }]}
-        />
-        <ActionIcon>
-          <Plus size={16} />
-        </ActionIcon>
-      </Box>
-      <Box sx={(theme) => ({ flex: 1, marginTop: theme.spacing.sm })}>
+      <Text fz="md" weight="bold">
+        Summary
+      </Text>
+      <Box sx={(theme) => ({ flex: 1, marginTop: 10 })}>
         <ScrollArea>
           <Box
             display="flex"
             sx={(theme) => ({ gap: theme.spacing.sm, flexDirection: "column" })}
           >
-            <Card p="sm">
+            <Card p="sm" withBorder>
               <Group position="apart">
                 <div className="flex">
                   <Text
@@ -51,7 +24,10 @@ export const Overview = () => {
                   >
                     Selected item title
                   </Text>
-                  <Text fz="sm" color='grape' ml={2}>{' '} x3</Text>
+                  <Text fz="sm" color="grape" ml={2}>
+                    {" "}
+                    x3
+                  </Text>
                 </div>
                 <Text fz="sm">Total</Text>
               </Group>
@@ -59,6 +35,9 @@ export const Overview = () => {
           </Box>
         </ScrollArea>
       </Box>
+      <Card my="sm" p={10} sx={() => ({ textAlign: "end" })}>
+        <Text>Total: 12</Text>
+      </Card>
       <Box sx={() => ({ display: "flex", justifyContent: "center" })}>
         <Button className="w-full">Create</Button>
       </Box>

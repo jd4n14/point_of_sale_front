@@ -20,6 +20,7 @@ const LoginPage = () => {
 
   const onSubmit = async ({ email, password }: RegisterUser) => {
     const { data, error } = await login({ user: { email, password } });
+    console.log('on submit', data, error)
     if (error) throw error;
     setToken(data?.login.token);
     navigate("/");

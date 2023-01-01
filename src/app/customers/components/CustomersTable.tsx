@@ -1,85 +1,67 @@
-import { Table } from "@mantine/core";
-import {
-  useReactTable,
-  getCoreRowModel,
-  flexRender,
-  createColumnHelper,
-  ColumnDef,
-} from "@tanstack/react-table";
+import DataTable from "../../../shared/components/DataTable";
+import { Pagination, Group, ScrollArea } from "@mantine/core";
+import { PaginatedMetadata } from "../../../gql/documents";
 
 type Customer = {
-  identifier: string;
+  identifier?: string | null;
   name: string;
   lastName: string;
-  debt: number;
-  type: string;
-  status: boolean;
 };
 
-const columnHelper = createColumnHelper<Customer>();
-
-const columns: ColumnDef<Customer, any>[] = [
-  columnHelper.accessor("identifier", {
-    id: "identifier",
-    cell: (info) => info.renderValue(),
-  }),
-  columnHelper.accessor((row) => `${row.name} ${row.lastName}`, {
-    id: "fullName",
-    cell: (info) => info.getValue(),
-  }),
-  columnHelper.accessor("type", {
-    id: "type",
-    cell: (info) => info.getValue(),
-  }),
-  columnHelper.accessor("debt", {
-    id: "debt",
-    cell: (info) => info.renderValue(),
-  }),
-  columnHelper.accessor("status", {
-    id: "status",
-    cell: (info) => <span>{info.renderValue()}</span>,
-  }),
-  columnHelper.display({
-    id: "actions",
-    cell: () => <span></span>,
-  }),
-];
-
-export const CustomersTable = ({ customers }: { customers: Customer[] }) => {
-  const table = useReactTable({
-    columns,
-    data: customers,
-    getCoreRowModel: getCoreRowModel(),
-  });
+export const CustomersTable = ({
+  customers,
+  meta,
+}: {
+  customers: Customer[];
+  meta?: PaginatedMetadata;
+}) => {
   return (
-    <Table striped>
-      <thead>
-        {table.getHeaderGroups().map((headerGroup) => (
-          <tr key={headerGroup.id}>
-            {headerGroup.headers.map((header) => (
-              <th key={header.id}>
-                {header.isPlaceholder
-                  ? null
-                  : flexRender(
-                      header.column.columnDef.header,
-                      header.getContext()
-                    )}
-              </th>
-            ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody>
-        {table.getRowModel().rows.map((row) => (
-          <tr key={row.id}>
-            {row.getVisibleCells().map((cell) => (
-              <td key={cell.id}>
-                {flexRender(cell.column.columnDef.cell, cell.getContext())}
-              </td>
-            ))}
-          </tr>
-        ))}
-      </tbody>
-    </Table>
+    <div className="flex-1 flex flex-col mb-1">
+      <div className="flex-1">
+        <ScrollArea>
+          <DataTable data={customers}>
+            {(columnHelper) => [
+              columnHelper.accessor("identifier", {
+                id: "identifier",
+                cell: (info) => info.renderValue(),
+                header: "Identifier",
+              }),
+              columnHelper.accessor((row) => `${row.name} ${row.lastName}`, {
+                id: "fullName",
+                cell: (info) => info.getValue(),
+                header: "Name",
+              }),
+              columnHelper.display({
+                id: "type",
+                cell: (info) => info.getValue(),
+                header: "Type",
+              }),
+              columnHelper.display({
+                id: "debt",
+                cell: (info) => <span></span>,
+                header: "Debt",
+              }),
+              columnHelper.display({
+                id: "status",
+                cell: (info) => <span></span>,
+                header: "Status",
+              }),
+              columnHelper.display({
+                id: "actions",
+                cell: () => <span></span>,
+              }),
+            ]}
+          </DataTable>
+        </ScrollArea>
+      </div>
+      <Group position="center">
+        <div className="flex justify-center w-full">
+          <Pagination
+            total={meta?.totalPages || 0}
+            initialPage={meta?.currentPage || 1}
+          />
+        </div>
+      </Group>
+    </div>
   );
 };

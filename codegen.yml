@@ -4,8 +4,11 @@ documents:
   - "src/**/*.tsx"
 ignoreNoDocuments: true
 generates:
-  src/gql/:
-    preset: client
-    presetConfig:
-      augmentedModuleName: '@urql/core'
- 
+  src/gql/documents.tsx:
+    config:
+      withHooks: true
+      withComponent: true
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-urql

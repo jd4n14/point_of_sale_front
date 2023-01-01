@@ -29,11 +29,12 @@ export const Aside = ({ children }) => {
         overlayOpacity={0.55}
         overlayBlur={3}
       >
-        <Paper p="md" style={{ height: '100vh' }}>
+        <Paper p="sm" style={{ height: '100vh' }}>
+          {children}
         </Paper>
       </Drawer>
       <MediaQuery smallerThan="md" styles={{ display: 'none' }}>
-        <MantineAside p="md" hiddenBreakpoint="md" width={{ md: 300 }}>
+        <MantineAside p="sm" hiddenBreakpoint="md" width={{ md: 300 }}>
           {children}
         </MantineAside>
       </MediaQuery>

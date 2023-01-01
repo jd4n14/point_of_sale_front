@@ -32,7 +32,14 @@ const client = createClient({
     authExchange<AuthType | null | undefined>({
       getAuth: async ({ authState }) => {
         if (!authState) {
-          const user = JSON.parse(localStorage.getItem("user") || '');
+          const user = await new Promise((resolve) => {
+            const userRaw = localStorage.getItem("user");
+            try {
+              resolve(JSON.parse(userRaw || ""));
+            } catch (error) {
+              resolve(null);
+            }
+          });
           if (user) return { token: user.token };
           localStorage.removeItem("user");
           return null;

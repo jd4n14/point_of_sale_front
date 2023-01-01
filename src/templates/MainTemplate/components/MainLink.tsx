@@ -76,6 +76,12 @@ const data = [
     label: "Settings",
     to: "settings",
   },
+  {
+    icon: <Database size={16} />,
+    color: "grape",
+    label: "Stores",
+    to: "stores",
+  },
 ];
 
 export function MainLinks() {

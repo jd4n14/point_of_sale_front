@@ -6,6 +6,7 @@ import UsersRoutes from "../app/users/routes";
 import CustomersRoutes from "../app/customers/routes";
 import PaymentRoutes from "../app/payments/routes";
 import SettingsRoutes from "../app/settings/routes";
+import StoreRoutes from "../app/stores/routes";
 import { ProtectedRoute } from "./ProtectedRoute";
 
 const router = createBrowserRouter([
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
           ...CustomersRoutes,
           ...PaymentRoutes,
           ...SettingsRoutes,
+          ...StoreRoutes
         ],
       },
     ],
